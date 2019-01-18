@@ -1,3 +1,7 @@
+#coding=utf-8
+
+# 计算增加一个节点，同一个hash值分配到新rs的几率
+# 影响到具体范围没有体现出来，这里的效果是rs加入到哪？然后只影响他前后的结果
 from hashlib import md5
 from struct import unpack_from
 from bisect import bisect_left

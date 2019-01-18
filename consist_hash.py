@@ -1,3 +1,5 @@
+#coding=utf-8
+# 假设流是均匀的情况下，计算rs被分配到的几率，平均值是多少，最大最小和平均值的差值百分比
 from hashlib import md5
 from struct import unpack_from
 from bisect import bisect_left
@@ -16,13 +18,19 @@ ring = []
 hash2node = {}
 
 for n in range(NODES):
+    # 计算hash
     h = _hash(n)
+    # rs添加到ring中
     ring.append(h)
+    # rs排序
     ring.sort()
+    # 用一个字典记录每个hash值对应的rs
+    # 这个的作用是统计每个rs节点，有多少hash值对应上
     hash2node[h] = n
 
 for item in range(ITEMS):
     h = _hash(item)
+    # 算出hash后，找到在ring中合适的位置，这个位置其实不用取模，bisect_right才需要
     n = bisect_left(ring, h) % NODES
     node_stat[hash2node[ring[n]]] += 1
 
